@@ -5,14 +5,17 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     public float speed;
+    public float jumpheight;
     public GameObject snorlaxPrefab;
     public Sprite originalSprite;
     public Sprite secondSprite;
     private SpriteRenderer sr;
+    private Rigidbody2D rb; 
     // Start is called before the first frame update
     void Start()
     {
-        sr = GetComponent<SpriteRenderer>(); 
+        sr = GetComponent<SpriteRenderer>();
+        rb = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
@@ -42,10 +45,16 @@ public class PlayerMovement : MonoBehaviour
             sr.sprite = secondSprite;
         }
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKey(KeyCode.Space))
+        {
+            rb.AddForce(Vector2.up * jumpheight);
+            sr.sprite = secondSprite;
+        }
+
+        /*if (Input.GetKeyDown(KeyCode.Space))
         {
             spawnSnorlax();
-        }
+        }*/
 
 
 
